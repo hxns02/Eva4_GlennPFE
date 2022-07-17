@@ -13,7 +13,7 @@ const Sidebar = () => {
                         <img src={process.env.PUBLIC_URL+'/dist/img/user2-160x160.jpg'} className="img-circle elevation-2" />
                     </div>
                     <div className="info">
-                        <span className="d-block">Kevin Vega</span>
+                        <span className="d-block">Glenn Zamorano</span>
                     </div>
                 </div>
                 <nav className="mt-2">
