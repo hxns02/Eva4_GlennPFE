@@ -9,8 +9,9 @@ import ProductsAdmin from './components/products/ProductsAdmin';
 import ProductsAdd from './components/products/ProductsAdd';
 import ProductsEdit from './components/products/ProductsEdit';
 
-import ClientsAdmin from './components/clients/ClientsAdmin';
+
 import ClientsAdd from './components/clients/ClientsAdd';
+import ClientsAdmin from './components/clients/Clientsdmin';
 import ClientsEdit from './components/clients/ClientsEdit';
 
 
