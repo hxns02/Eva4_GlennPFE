@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes} from 'react-router-dom';
 import Login from './components/Login';
 import Sales from './components/Sales';
-import Siderbar from './components/Siderbar';
+import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
 
 import ProductsAdmin from './components/products/ProductsAdmin';
@@ -11,7 +11,7 @@ import ProductsEdit from './components/products/ProductsEdit';
 
 
 import ClientsAdd from './components/clients/ClientsAdd';
-import ClientsAdmin from './components/clients/Clientsdmin';
+import ClientsAdmin from './components/clients/ClientsAdmin';
 import ClientsEdit from './components/clients/ClientsEdit';
 
 
@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />}></Route>
         <Route path="/sales" element={<Sales />}></Route>
-        <Route path="/siderbar" element={<Siderbar />}></Route>
+        <Route path="/sidebar" element={<Sidebar />}></Route>
         <Route path="/topbar" element={<Topbar />}></Route>
         <Route path="/products" element={<ProductsAdmin />}></Route>
         <Route path="/products/add" element={<ProductsAdd />}></Route>

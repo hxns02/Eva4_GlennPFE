@@ -10,7 +10,7 @@ const Sidebar = () => {
             <div className="sidebar">
                 <div className="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div className="image">
-                        <img src={process.env.PUBLIC_URL+'/dist/img/user2-160x160.jpg'} className="img-circle elevation-2" />
+                        <img src={process.env.PUBLIC_URL+'/dist/img/user1-128x128.jpg'} className="img-circle elevation-2" />
                     </div>
                     <div className="info">
                         <span className="d-block">Glenn Zamorano</span>

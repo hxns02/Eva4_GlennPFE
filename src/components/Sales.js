@@ -1,6 +1,6 @@
 import React from "react";
 import Topbar from './Topbar';
-import Sidebar from './Siderbar';
+import Sidebar from './Sidebar';
 import config from '../helpers/config.json';
 
 class Sales extends React.Component{

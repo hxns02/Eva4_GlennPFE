@@ -4,39 +4,39 @@ import Topbar from "../Topbar";
 import { Link, useNavigate } from "react-router-dom";
 import config from './../../helpers/config.json';
 
-const ProductsAdmin = () => {
+const ClientsAdmin = () => {
     let navigate = useNavigate();
     const [rowsData, setRows] = useState(0);
     useEffect(() => {
-        updateProducts();
+        updateClients();
     });
 
-    const updateProducts = () => {
+    const updateClients = () => {
         const requestOptions = {
             method: 'GET', headers: { 'Content-Type': 'application/json'}
         };
-        fetch(config.apiURL+"products/"+config.operatorId, requestOptions).then((response) => {
+        fetch(config.apiURL+"clients/"+config.operatorId, requestOptions).then((response) => {
             return response.json();
         }).then((result) => {
-            //this.setState({ productList: result.data.map((product) => { return product; }) });
-            let productList = result.data.map((product) => { return product; });
+            //this.setState({ clientList: result.data.map((client) => { return client; }) });
+            let clientList = result.data.map((client) => { return client; });
             let rowData;
-            if(productList.length === 0){
-                rowData = (<tr><td colSpan="4" className="text-center">No existen productos</td></tr>);
+            if(clientList.length === 0){
+                rowData = (<tr><td colSpan="4" className="text-center">No existen clientes</td></tr>);
             } else {
-                rowData = productList.map(p => {
+                rowData = clientList.map(c => {
                     let button;
-                    if(p.active){
-                        button = <button className="btn btn-secondary" onClick={() => disable(p)}><i className="fas fa-eye-slash"></i> Deshabilitar</button>;
+                    if(c.active){
+                        button = <button className="btn btn-secondary" onClick={() => disable(c)}><i className="fas fa-eye-slash"></i> Deshabilitar</button>;
                     } else {
-                        button = <button className="btn btn-primary" onClick={() => enable(p)}><i className="fas fa-eye"></i> Habilitar</button>;
+                        button = <button className="btn btn-primary" onClick={() => enable(c)}><i className="fas fa-eye"></i> Habilitar</button>;
                     }
                     
                     return (<tr>
-                        <td>{p.name}</td><td className="text-right">${p.price}</td><td className="text-right">{p.stock}</td>
+                        <td>{c.name}</td><td className="text-right">${c.name}</td><td className="text-right">{c.rol}</td>
                         <td className="d-flex justify-content-between">
                             {button}
-                            <button className="btn btn-warning" onClick={() => edit(p)}><i className="fas fa-pencil"></i> Editar</button>
+                            <button className="btn btn-warning" onClick={() => edit(c)}><i className="fas fa-pencil"></i> Editar</button>
                         </td>
                     </tr>); 
                 });
@@ -45,54 +45,44 @@ const ProductsAdmin = () => {
         });
     };
 
-    const disable = (product) => {
-        if(window.confirm("¿Está seguro/a de querer deshabilitar:\n"+product.name)){
+    const disable = (client) => {
+        if(window.confirm("¿Está seguro/a de querer deshabilitar:\n"+client.name)){
             const requestOptionsPatch = {
                 method: 'PUT', headers: { 'Content-Type': 'application/json'}, body: JSON.stringify({
                     operatorId: config.operatorId,
-                    name: product.name,
-                    MSU: parseInt(product.MSU),
-                    price: parseInt(product.price),
-                    stock: parseInt(product.stock),
-                    MDPrice: parseInt(product.MDPrice),
-                    MDPercentage: parseInt(product.MDPercentage),
+                    name: client.name,                 
                     active: false
                 })
             };
-            fetch(config.apiURL+"products/"+product.id, requestOptionsPatch).then((response) => {
+            fetch(config.apiURL+"clients/"+client.id, requestOptionsPatch).then((response) => {
                 return response.json();
             }).then((result) => {
-                updateProducts();
+                updateClients();
                 window.alert("Deshabilitación completada");
             });   
         }
     }
-    const enable = (product) => {
-        if(window.confirm("¿Está seguro/a de querer volver a habilitar:\n"+product.name)){
+    const enable = (client) => {
+        if(window.confirm("¿Está seguro/a de querer volver a habilitar:\n"+client.name)){
             const requestOptionsPatch = {
                 method: 'PUT', headers: { 'Content-Type': 'application/json'}, body: JSON.stringify({
                     operatorId: config.operatorId,
-                    name: product.name,
-                    MSU: parseInt(product.MSU),
-                    price: parseInt(product.price),
-                    stock: parseInt(product.stock),
-                    MDPrice: parseInt(product.MDPrice),
-                    MDPercentage: parseInt(product.MDPercentage),
+                    name: client.name,
                     active: true
                 })
             };
-            fetch(config.apiURL+"products/"+product.id, requestOptionsPatch).then((response) => {
+            fetch(config.apiURL+"clients/"+client.id, requestOptionsPatch).then((response) => {
                 return response.json();
             }).then((result) => {
-                updateProducts();
+                updateClients();
                 window.alert("Habilitación completada")
             });   
         }
     }
-    const edit = (product) => {
-        let productData = JSON.stringify(product);
-        sessionStorage.setItem("product", productData);
-        navigate("/products/edit");
+    const edit = (client) => {
+        let clientsData = JSON.stringify(client);
+        sessionStorage.setItem("client", clientsData);
+        navigate("/clients/edit");
     }
     
     return (
@@ -104,12 +94,12 @@ const ProductsAdmin = () => {
                     <div className="container-fluid">
                         <div className="row mb-2">
                             <div className="col-sm-6">
-                                <h1>Productos</h1>
+                                <h1>Panel de Clientes</h1>
                             </div>
                             <div className="col-sm-6">
                                 <ol className="breadcrumb float-sm-right">
                                     <li className="breadcrumb-item"><a href="/">Cloud Sales</a></li>
-                                    <li className="breadcrumb-item active">Productos</li>
+                                    <li className="breadcrumb-item active">Clientes</li>
                                 </ol>
                             </div>
                         </div>
@@ -118,17 +108,15 @@ const ProductsAdmin = () => {
                     <section className="content">
                         <div className="card">
                             <div className="card-header">
-                                <Link to="/products/add" className="btn btn-success"><i className="fas fa-plus"></i> Nuevo</Link>
+                                <Link to="/clients/add" className="btn btn-success"><i className="fas fa-plus"></i> Nuevo</Link>
                             </div>
                             <div className="card-body">
                                 <div className="row">
                                     <table className="table">
                                         <thead>
                                             <tr>
-                                                <th>Producto</th>
-                                                <th>Precio Unitario</th>
-                                                <th>Stock Actual</th>
-                                                <th>Acciones</th>
+                                                <th>Nombre Cliente</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -143,4 +131,4 @@ const ProductsAdmin = () => {
             </div>
     );
 }
-export default ProductsAdmin;
+export default ClientsAdmin;
